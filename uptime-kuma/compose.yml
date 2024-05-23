@@ -1,4 +1,4 @@
-version: '3.8'\
+version: '3.8'
 
 services:
   uptime-kuma:
@@ -10,4 +10,3 @@ services:
       - 3001:3001
     restart: unless-stopped
     pull_policy: build
-    
