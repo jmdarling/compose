@@ -13,3 +13,5 @@ services:
       - /etc/caddy:/etc/caddy
       - ./daddy-data:/data
       - ./caddy-config:/config
+    environment:
+      CLOUDFLARE_AUTH_TOKEN: ${CLOUDFLARE_AUTH_TOKEN}
