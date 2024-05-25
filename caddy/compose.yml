@@ -4,6 +4,7 @@ services:
   caddy:
     image: jmdarling0/caddy-cloudflare:latest
     restart: unless-stopped
+    pull_policy: build
     ports:
       - "80:80"
       - "443:443"
@@ -12,7 +13,6 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-    pull_policy: build
 
 volumes:
   caddy_data:
