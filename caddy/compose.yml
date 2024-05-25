@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  caddy:
+    image: jmdarling0/caddy-cloudflare:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    pull_policy: build
+
+volumes:
+  caddy_data:
+  caddy_config:
