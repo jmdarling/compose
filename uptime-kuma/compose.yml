@@ -8,3 +8,7 @@ services:
       - 3001:3001
     restart: unless-stopped
     pull_policy: build
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`uptime-kuma.iscariot.nervhq.io`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
