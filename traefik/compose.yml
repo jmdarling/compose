@@ -9,6 +9,11 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge=true"
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.cloudflare.acme.email=hello@jmdarling.com"
+      - "--certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json"
       - "--log.level=DEBUG"
     network_mode: bridge
     ports:
@@ -16,8 +21,12 @@ services:
       - "80:80"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
+    environment:
+      - CF_API_EMAIL=${CF_API_EMAIL}
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
+      - /appdata/traefik/letsencrypt:/letsencrypt
     restart: unless-stopped
     pull_policy: build    
