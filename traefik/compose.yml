@@ -5,6 +5,7 @@ services:
     container_name: traefik
     # Enables the web UI and tells Traefik to listen to docker
     command:
+      - "--api.dashboard=true"
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
