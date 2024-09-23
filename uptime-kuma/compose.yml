@@ -10,6 +10,6 @@ services:
     pull_policy: build
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=uptime-kuma_default"
+      - "traefik.docker.network=traefik_default"
       - "traefik.http.routers.uptimekuma.rule=Host(`uptime-kuma.iscariot.nervhq.io`)"
       - "traefik.http.routers.uptimekuma.entrypoints=web"
