@@ -4,12 +4,12 @@ services:
     container_name: uptime-kuma
     volumes:
       - /appdata/uptime-kuma:/app/data
+    network: bridge
     ports:
       - 3001:3001
     restart: unless-stopped
     pull_policy: build
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=traefik_default"
       - "traefik.http.routers.uptimekuma.rule=Host(`uptime-kuma.iscariot.nervhq.io`)"
       - "traefik.http.routers.uptimekuma.entrypoints=web"
