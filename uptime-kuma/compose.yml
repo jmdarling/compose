@@ -12,5 +12,5 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.uptimekuma.rule=Host(`uptime-kuma.iscariot.nervhq.io`)"
-      - "traefik.http.routers.uptimekuma.entrypoints=web"
+      - "traefik.http.routers.uptimekuma.entrypoints=websecure"
       - "traefik.http.routers.uptimekuma.tls.certresolver=cloudflare"
