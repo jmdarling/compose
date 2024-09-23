@@ -10,5 +10,5 @@ services:
     pull_policy: build
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`uptime-kuma.iscariot.nervhq.io`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.uptimekuma.rule=Host(`uptime-kuma.iscariot.nervhq.io`)"
+      - "traefik.http.routers.uptimekuma.entrypoints=web"
