@@ -4,7 +4,7 @@ services:
     container_name: uptime-kuma
     volumes:
       - /appdata/uptime-kuma:/app/data
-    network: bridge
+    network_mode: bridge
     ports:
       - 3001:3001
     restart: unless-stopped
