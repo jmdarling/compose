@@ -15,6 +15,6 @@ services:
     pull_policy: build
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.uptimekuma.rule=Host(`overseer.iscariot.nervhq.io`)"
-      - "traefik.http.routers.uptimekuma.entrypoints=websecure"
-      - "traefik.http.routers.uptimekuma.tls.certresolver=cloudflare"
+      - "traefik.http.routers.overseer.rule=Host(`overseer.iscariot.nervhq.io`)"
+      - "traefik.http.routers.overseer.entrypoints=websecure"
+      - "traefik.http.routers.overseer.tls.certresolver=cloudflare"
