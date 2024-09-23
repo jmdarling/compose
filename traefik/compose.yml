@@ -10,7 +10,7 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entryPoints.web.address=:80"
       - "--log.level=DEBUG"
-    network: bridge
+    network_mode: bridge
     ports:
       # The HTTP port
       - "80:80"
