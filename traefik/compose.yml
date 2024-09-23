@@ -19,4 +19,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     pull_policy: build
+  whoami:
+    image: "traefik/whoami"
+    container_name: "whoami"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.iscariot.nervhq.io`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
     
