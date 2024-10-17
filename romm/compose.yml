@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
     environment:
-      - DB_HOST=romm-db
+      - DB_HOST=romm-database
       - DB_NAME=romm # Should match MYSQL_DATABASE in mariadb
       - DB_USER=romm-user # Should match MYSQL_USER in mariadb
       - DB_PASSWD=${ROMM_DATABASE_PASSWORD} # Should match MYSQL_PASSWORD in mariadb
