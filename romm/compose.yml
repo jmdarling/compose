@@ -46,7 +46,7 @@ services:
       - "traefik.http.routers.romm.rule=Host(`romm.iscariot.nervhq.io`)"
       - "traefik.http.routers.romm.entrypoints=websecure"
       - "traefik.http.routers.romm.tls.certresolver=cloudflare"
-      - "traefik.http.services.romm.loadbalancer.server.port=27709"
+      - "traefik.http.services.romm.loadbalancer.server.port=8080"
 
   romm-db:
     container_name: romm-db
