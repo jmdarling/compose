@@ -23,6 +23,7 @@ services:
       - DB_USER=romm-user # Should match MYSQL_USER in mariadb
       - DB_PASSWD=${ROMM_DATABASE_PASSWORD} # Should match MYSQL_PASSWORD in mariadb
       - ROMM_AUTH_SECRET_KEY=${ROMM_AUTH_SECRET_KEY} # Generate a key with `openssl rand -hex 32`
+      - ROMM_HOST=romm.iscariot.nervhq.io
       - IGDB_CLIENT_ID= # Generate an ID and SECRET in IGDB
       - IGDB_CLIENT_SECRET= # https://api-docs.igdb.com/#account-creation
       - MOBYGAMES_API_KEY=${ROMM_MOBYGAMES_API_KEY} # https://www.mobygames.com/info/api/
