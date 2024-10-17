@@ -12,13 +12,12 @@ services:
       - "8000:8000"
       - "9443:9443"
     labels:
-      # Frontend
       - "traefik.enable=true"
       - "traefik.http.routers.portainer.rule=Host(`portainer.iscariot.nervhq.io`)"
       - "traefik.http.routers.portainer.entrypoints=websecure"
-      - "traefik.http.services.portainer.loadbalancer.server.port=9443"
-      - "traefik.http.routers.portainer.service=portainer"
       - "traefik.http.routers.portainer.tls.certresolver=cloudflare"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9443"
+      - "traefik.http.services.portainer.loadbalancer.server.scheme=https"
 
 volumes:
   portainer_data:
