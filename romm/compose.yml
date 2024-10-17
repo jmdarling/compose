@@ -1,0 +1,66 @@
+# Needed environment variables:
+# ROMM_DATABASE_PASSWORD - A password for the romm database.
+# ROMM_AUTH_SECRET_KEY - A secret key for romm auth.
+# ROMM_MOBYGAMES_API_KEY - API key to access MobyGames data.
+
+services:
+  romm:
+    container_name: romm
+
+    image: rommapp/romm:latest
+    
+    depends_on:
+      - romm-db
+
+    pull_policy: build
+
+    restart: unless-stopped
+
+    environment:
+      - DB_HOST=romm-db
+      - DB_NAME=romm # Should match MYSQL_DATABASE in mariadb
+      - DB_USER=romm-user # Should match MYSQL_USER in mariadb
+      - DB_PASSWD=${ROMM_DATABASE_PASSWORD} # Should match MYSQL_PASSWORD in mariadb
+      - ROMM_AUTH_SECRET_KEY=${ROMM_AUTH_SECRET_KEY} # Generate a key with `openssl rand -hex 32`
+      - IGDB_CLIENT_ID= # Generate an ID and SECRET in IGDB
+      - IGDB_CLIENT_SECRET= # https://api-docs.igdb.com/#account-creation
+      - MOBYGAMES_API_KEY=${ROMM_MOBYGAMES_API_KEY} # https://www.mobygames.com/info/api/
+      - STEAMGRIDDB_API_KEY # https://github.com/rommapp/romm/wiki/Generate-API-Keys#steamgriddb
+
+    network_mode: bridge
+
+    ports:
+      - 80:8080
+    
+    volumes:
+      - /appdata/romm/config:/romm/config # Path where config.yml is stored
+      - /appdata/romm/redis-data:/redis-data # Cached data for background tasks
+      - /appdata/romm/resources:/romm/resources # Resources fetched from IGDB (covers, screenshots, etc.)
+      - /mnt/lilin/media/games/assets:/romm/assets # Uploaded saves, states, etc.
+      - /mnt/lilin/media/games/console:/romm/library # Your game library
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.romm.rule=Host(`romm.iscariot.nervhq.io`)"
+      - "traefik.http.routers.romm.entrypoints=websecure"
+      - "traefik.http.routers.romm.tls.certresolver=cloudflare"
+
+  romm-db:
+    container_name: romm-database
+
+    image: mariadb:latest # if you experience issues, try: linuxserver/mariadb:latest
+
+    pull_policy: build
+        
+    restart: unless-stopped
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROMM_DATABASE_PASSWORD} # Use a unique, secure password
+      - MYSQL_DATABASE=romm
+      - MYSQL_USER=romm-user
+      - MYSQL_PASSWORD=${ROMM_DATABASE_PASSWORD}
+
+    network_mode: bridge
+
+    volumes:
+      - /appdata/romm/database/mysql:/var/lib/mysql
