@@ -10,14 +10,14 @@ services:
     image: rommapp/romm:latest
     
     depends_on:
-      - romm-database
+      - romm-db
 
     pull_policy: build
 
     restart: unless-stopped
 
     environment:
-      - DB_HOST=romm-database
+      - DB_HOST=romm-db
       - DB_NAME=romm # Should match MYSQL_DATABASE in mariadb
       - DB_USER=romm-user # Should match MYSQL_USER in mariadb
       - DB_PASSWD=${ROMM_DATABASE_PASSWORD} # Should match MYSQL_PASSWORD in mariadb
@@ -45,8 +45,8 @@ services:
       - "traefik.http.routers.romm.entrypoints=websecure"
       - "traefik.http.routers.romm.tls.certresolver=cloudflare"
 
-  romm-database:
-    container_name: romm-database
+  romm-db:
+    container_name: romm-db
 
     image: mariadb:latest # if you experience issues, try: linuxserver/mariadb:latest
 
