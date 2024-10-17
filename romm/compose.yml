@@ -10,7 +10,7 @@ services:
     image: rommapp/romm:latest
     
     depends_on:
-      - romm-db
+      - romm-database
 
     pull_policy: build
 
@@ -45,7 +45,7 @@ services:
       - "traefik.http.routers.romm.entrypoints=websecure"
       - "traefik.http.routers.romm.tls.certresolver=cloudflare"
 
-  romm-db:
+  romm-database:
     container_name: romm-database
 
     image: mariadb:latest # if you experience issues, try: linuxserver/mariadb:latest
