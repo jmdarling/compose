@@ -73,7 +73,7 @@ services:
       - 41896:3306
 
     volumes:
-      -/appdata/manyfold/database/postgresql:/var/lib/postgresql/data
+      - /appdata/manyfold/database/postgresql:/var/lib/postgresql/data
 
   manyfold-cache:
     container_name: manyfold-cache
