@@ -18,8 +18,7 @@ services:
 
     environment:
       DATABASE_ADAPTER: postgresql # mysql2 or sqlite3 are also supported
-      DATABASE_HOST: iscariot.nervhq.io
-      DATABASE_PORT: 41896
+      DATABASE_HOST: iscariot.nervhq.io:41896
       DATABASE_NAME: manyfold # or the path to the database file if using sqlite3
       DATABASE_USER: manyfold
       DATABASE_PASSWORD: ${MANYFOLD_DATABASE_PASSWORD}
