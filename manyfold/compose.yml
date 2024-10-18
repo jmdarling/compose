@@ -17,12 +17,7 @@ services:
     restart: unless-stopped
 
     environment:
-      DATABASE_URL: postgresql://manyfold:${MANYFOLD_DATABASE_PASSWORD}@iscariot.nervhq.io:41896/manyfold?pool=16
-      #DATABASE_ADAPTER: postgresql # mysql2 or sqlite3 are also supported
-      #DATABASE_HOST: iscariot.nervhq.io:41896
-      #DATABASE_NAME: manyfold # or the path to the database file if using sqlite3
-      #DATABASE_USER: manyfold
-      #DATABASE_PASSWORD: ${MANYFOLD_DATABASE_PASSWORD}
+      DATABASE_URL: mysql2://manyfold:${MANYFOLD_DATABASE_PASSWORD}@iscariot.nervhq.io:41896/manyfold?pool=16
       SECRET_KEY_BASE: ${MANYFOLD_SECRET_KEY_BASE}
       REDIS_URL: redis://iscariot.nervhq.io:58422/1
       PUID: 1000
@@ -57,23 +52,25 @@ services:
   manyfold-db:
     container_name: manyfold-db
 
-    image: postgres:15
+    image: mariadb:latest
 
     pull_policy: build
 
     restart: unless-stopped
 
     environment:
-      POSTGRES_USER: manyfold
-      POSTGRES_PASSWORD: ${MANYFOLD_DATABASE_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MANYFOLD_DATABASE_PASSWORD} # Use a unique, secure password
+      - MYSQL_DATABASE=manyfold
+      - MYSQL_USER=manyfold
+      - MYSQL_PASSWORD=${MANYFOLD_DATABASE_PASSWORD}
 
     network_mode: bridge
 
     ports:
-      - 41896:5432
+      - 41896:3306
 
     volumes:
-      - manyfold-db-data:/var/lib/postgresql/data
+      - /appdata/manyfold/db/mysql:/var/lib/mysql
 
   manyfold-cache:
     container_name: manyfold-cache
@@ -88,6 +85,3 @@ services:
 
     ports:
       - 58422:6379
-    
-volumes:
-  manyfold-db-data:
