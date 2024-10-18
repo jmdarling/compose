@@ -9,7 +9,7 @@ services:
     image: ghcr.io/manyfold3d/manyfold:latest
 
     depends_on:
-      - manfold-db
+      - manyfold-db
       - manyfold-cache
 
     pull_policy: build
