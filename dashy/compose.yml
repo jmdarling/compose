@@ -1,0 +1,27 @@
+services:
+  dashy:
+    container_name: dashy
+
+    image: lissy93/dashy
+    
+    pull_policy: build
+
+    restart: unless-stopped
+
+    environment:
+      - NODE_ENV=production
+      - UID=1000
+      - GID=1000
+
+    network_mode: bridge
+
+    ports:
+      - 11730:8080
+
+    volumes:
+      - /appdata/dashy/config/yml:/app/user-data/conf.yml
+
+    labels:
+      - "traefik.http.routers.dashy.rule=Host(`dashy.iscariot.nervhq.io`)"
+      - "traefik.http.routers.dashy.entrypoints=websecure"
+      - "traefik.http.routers.dashy.tls.certresolver=cloudflare"
