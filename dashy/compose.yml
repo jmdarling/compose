@@ -19,7 +19,7 @@ services:
       - 11730:8080
 
     volumes:
-      - /appdata/dashy/config/yml:/app/user-data/conf.yml
+      - /appdata/dashy/config.yml:/app/user-data/conf.yml
 
     labels:
       - "traefik.http.routers.dashy.rule=Host(`dashy.iscariot.nervhq.io`)"
