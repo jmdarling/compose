@@ -69,7 +69,7 @@ services:
     network_mode: bridge
 
     ports:
-      - 41896:3306
+      - 41896:5432
 
     volumes:
       - /appdata/manyfold/database/postgresql:/var/lib/postgresql/data
