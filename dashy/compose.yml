@@ -22,6 +22,7 @@ services:
       - /appdata/dashy/config.yml:/app/user-data/conf.yml
 
     labels:
+      - "traefik.enable=true"
       - "traefik.http.routers.dashy.rule=Host(`dashy.iscariot.nervhq.io`)"
       - "traefik.http.routers.dashy.entrypoints=websecure"
       - "traefik.http.routers.dashy.tls.certresolver=cloudflare"
