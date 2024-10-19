@@ -7,11 +7,8 @@ services:
     command:
       - "--accesslog=true"
       - "--api.dashboard=true"
-      - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entryPoints.dashboard.address=:8080"
-      - "--entrypoints.dashboard.http.tls=false"
       - "--entryPoints.web.address=:80"
       - "--entryPoints.websecure.address=:443"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
@@ -38,3 +35,5 @@ services:
       - /appdata/traefik/letsencrypt:/letsencrypt
     restart: unless-stopped
     pull_policy: build
+    labels:
+      "
