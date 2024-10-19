@@ -10,6 +10,8 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.dashboard.address=:8080"
+      - "--entrypoints.dashboard.http.tls=false"
       - "--entryPoints.web.address=:80"
       - "--entryPoints.websecure.address=:443"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
@@ -35,4 +37,4 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /appdata/traefik/letsencrypt:/letsencrypt
     restart: unless-stopped
-    pull_policy: build    
+    pull_policy: build
