@@ -1,0 +1,30 @@
+# Needed environment variables:
+# HOME_ASSISTANT_HOST - Host at which to run home assistant.
+
+services:
+  home-assistant:
+    container_name: home-assistant
+    
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+
+    privileged: true
+
+    pull_policy: build
+
+    restart: unless-stopped
+
+    network_mode: bridge
+
+    ports:
+      - 8123:8123
+    
+    volumes:
+      - /appdata/home-assistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homeassistant.rule=Host(`${HOME_ASSISTANT_HOST}`)"
+      - "traefik.http.routers.homeassistant.entrypoints=websecure"
+      - "traefik.http.routers.homeassistant.tls.certresolver=cloudflare"
