@@ -1,3 +1,6 @@
+# Needed environment variables:
+# DASHY_HOST - The URL at which this service should be made available.
+
 services:
   dashy:
     container_name: dashy
@@ -23,6 +26,6 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashy.rule=Host(`dashy.iscariot.nervhq.io`)"
+      - "traefik.http.routers.dashy.rule=Host(`${DASHY_HOST}`)"
       - "traefik.http.routers.dashy.entrypoints=websecure"
       - "traefik.http.routers.dashy.tls.certresolver=cloudflare"
