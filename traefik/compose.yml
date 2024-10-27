@@ -1,3 +1,7 @@
+# Needed environment variables:
+# CF_API_EMAIL - Email used for cloudflare registration.
+# CF_DNS_API_TOKEN - Token for cloudflare dns challenge.
+
 services:
   traefik:
     # The official v3 Traefik docker image
