@@ -14,9 +14,6 @@ services:
     restart: unless-stopped
 
     network_mode: host
-
-    ports:
-      - 8123:8123
     
     volumes:
       - /appdata/home-assistant/config:/config
