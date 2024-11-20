@@ -38,6 +38,8 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
-      - /appdata/traefik/letsencrypt:/letsencrypt
+      - traefik-appdata:/letsencrypt
     restart: unless-stopped
     pull_policy: build
+volumes:
+  traefik-appdata:
