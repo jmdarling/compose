@@ -8,7 +8,6 @@ services:
           devices:
             - driver: nvidia
               capabilities: [gpu]
-    runtime: nvidia
     ports:
       - "11434:11434"
     volumes:
