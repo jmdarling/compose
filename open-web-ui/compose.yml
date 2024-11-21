@@ -13,7 +13,7 @@ services:
       - "3000:8080"
 
     volumes:
-      - open-webui:/app/backend/data
+      - open-web-ui:/app/backend/data
 
     labels:
       - "traefik.enable=true"
@@ -22,4 +22,4 @@ services:
       - "traefik.http.routers.dashy.tls.certresolver=cloudflare"
 
 volumes:
-  open-webui:
+  open-web-ui:
