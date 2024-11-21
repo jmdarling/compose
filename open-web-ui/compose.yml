@@ -1,0 +1,25 @@
+# Needed environment variables:
+# OPEN_WEB_UI_HOST - The URL at which this service should be made available.
+
+services:
+  open-web-ui:
+    container_name: open-web-ui
+    image: ghcr.io/open-webui/open-webui:main
+    pull_policy: build
+    restart: unless-stopped
+
+    network_mode: bridge
+    ports:
+      - "3000:8080"
+
+    volumes:
+      - open-webui:/app/backend/data
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashy.rule=Host(`${OPEN_WEB_UI_HOST}`)"
+      - "traefik.http.routers.dashy.entrypoints=websecure"
+      - "traefik.http.routers.dashy.tls.certresolver=cloudflare"
+
+volumes:
+  open-webui:
