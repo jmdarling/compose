@@ -17,9 +17,9 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashy.rule=Host(`${OPEN_WEB_UI_HOST}`)"
-      - "traefik.http.routers.dashy.entrypoints=websecure"
-      - "traefik.http.routers.dashy.tls.certresolver=cloudflare"
+      - "traefik.http.routers.openwebui.rule=Host(`${OPEN_WEB_UI_HOST}`)"
+      - "traefik.http.routers.openwebui.entrypoints=websecure"
+      - "traefik.http.routers.openwebui.tls.certresolver=cloudflare"
 
 volumes:
   open-web-ui:
