@@ -1,0 +1,16 @@
+# Needed environment variables:
+# TS_AUTHKEY - Tailscale Auth Key.
+
+services:
+    tailscale:
+        container_name: tailscaled
+        image: tailscale/tailscale
+        volumes:
+            - /var/lib:/var/lib
+            - /dev/net/tun:/dev/net/tun
+        network_mode: bridge
+        cap_add:
+            - NET_ADMIN
+            - NET_RAW
+        environment:
+            - TS_AUTHKEY=${TS_AUTHKEY}
