@@ -13,6 +13,14 @@ services:
     network_mode: bridge
     ports:
       - '2283:2283'
+    environment:
+      - DB_HOSTNAME: 'iscariot.nervhq.io'
+      - DB_PORT: '5432'
+      - DB_USERNAME: 'immich'
+      - DB_PASSWORD: ${IMMICH_DB_PASSWORD}
+      - DB_DATABASE_NAME: 'immich'
+      - REDIS_HOSTNAME: 'iscariot.nervhq.io'
+      
     volumes:
       - /mnt/lilin/media/images/photos:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
@@ -45,6 +53,8 @@ services:
     pull_policy: build
     restart: unless-stopped
     network_mode: bridge
+    ports:
+      -  '5432:5432'
     command:
       [
         'postgres',
