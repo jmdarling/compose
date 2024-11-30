@@ -16,6 +16,12 @@ services:
     volumes:
       - /mnt/lilin/media/images/photos:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.immich.rule=Host(`immich.iscariot.nervhq.io`)"
+      - "traefik.http.routers.immich.entrypoints=websecure"
+      - "traefik.http.routers.immich.tls.certresolver=cloudflare"
+      - "traefik.http.services.immich.loadbalancer.server.port=2283"
 
   immich-machine-learning:
     container_name: immich-machine-learning
