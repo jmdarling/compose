@@ -15,6 +15,7 @@ This repository contains the Docker Compose configurations for various services.
 - **open-web-ui**: [Docker Compose configuration for open-web-ui](./open-web-ui/compose.yml).
 - **overseer**: [Docker Compose configuration for overseer](./overseer/compose.yml).
 - **portainer**: [Docker Compose configuration for portainer](./portainer/compose.yml).
+- **rennovate**: [Docker Compose configuration for rennovate](./rennovate/compose.yml).
 - **romm**: [Docker Compose configuration for romm](./romm/compose.yml).
 - **tailscale**: [Docker Compose configuration for tailscale](./tailscale/compose.yml).
 - **traefik**: [Docker Compose configuration for traefik](./traefik/compose.yml).
