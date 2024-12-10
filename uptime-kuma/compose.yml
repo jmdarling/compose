@@ -1,12 +1,9 @@
 # Needed environment variables:
 #  - UPTIME_KUMA_HOST: The hostname of the service.
-
 services:
   uptime-kuma:
     image: louislam/uptime-kuma:1
     container_name: uptime-kuma
-    ports:
-      - 3001:3001
     volumes:
       - /appdata/uptime-kuma:/app/data
     networks:
