@@ -18,3 +18,6 @@ services:
       - tunnel
     ports:
       - 8481:8080
+networks:
+  tunnel:
+    external: true
