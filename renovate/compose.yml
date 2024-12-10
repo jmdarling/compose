@@ -9,6 +9,7 @@ services:
     pull_policy: build
     restart: unless-stopped
     environment:
+      - LOG_LEVEL: debug
       - MEND_RNV_ACCEPT_TOS=y
       - MEND_RNV_LICENSE_KEY=${MEND_RNV_LICENSE_KEY}
       - MEND_RNV_PLATFORM=github
