@@ -1,0 +1,20 @@
+# Needed environment variables:
+#  - MEND_RNV_LICENSE_KEY: The license key for Renovate.
+#  - MEND_RNV_GITHUB_APP_ID: The GitHub App ID for Renovate.
+#  - MEND_RNV_GITHUB_APP_KEY: The GitHub private key for Renovate.
+services:
+  renovate:
+    container_name: renovate
+    image: renovate/renovate
+    pull_policy: build
+    restart: unless-stopped
+    environment:
+      - MEND_RNV_ACCEPT_TOS=y
+      - MEND_RNV_LICENSE_KEY=${MEND_RNV_LICENSE_KEY}
+      - MEND_RNV_PLATFORM=github
+      - MEND_RNV_GITHUB_APP_ID=${MEND_RNV_GITHUB_APP_ID}
+      - MEND_RNV_GITHUB_APP_KEY=${MEND_RNV_GITHUB_APP_KEY}
+    networks:
+      - tunnel
+    ports:
+      - 8481:8080
