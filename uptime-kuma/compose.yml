@@ -10,7 +10,7 @@ services:
     volumes:
       - /appdata/uptime-kuma:/app/data
     networks:
-      - proxynet
+      - proxy
     restart: unless-stopped
     pull_policy: build
     labels:
