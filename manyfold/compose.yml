@@ -1,48 +1,39 @@
 # Needed environment variables:
-# MANYFOLD_DATABASE_PASSWORD - A password for the manyfold database.
-# MANYFOLD_SECRET_KEY_BASE - Base to use for secret key generation.
+# - MANYFOLD_DATABASE_PASSWORD: A password for the manyfold database.
+# - MANYFOLD_SECRET_KEY_BASE: Base to use for secret key generation.
 
 services:
   manyfold:
     container_name: manyfold
-
     image: ghcr.io/manyfold3d/manyfold:latest
-
     depends_on:
       - manyfold-db
       - manyfold-cache
-
     pull_policy: build
-
     restart: unless-stopped
-
     environment:
-      DATABASE_URL: mysql2://manyfold:${MANYFOLD_DATABASE_PASSWORD}@iscariot.nervhq.io:41896/manyfold?pool=16
+      DATABASE_URL: mysql2://manyfold:${MANYFOLD_DATABASE_PASSWORD}@manyfold-db:3306/manyfold?pool=16
       SECRET_KEY_BASE: ${MANYFOLD_SECRET_KEY_BASE}
-      REDIS_URL: redis://iscariot.nervhq.io:58422/1
+      REDIS_URL: redis://manyfold-cache:6379/1
       PUID: 1000
       PGID: 1000
-
-    network_mode: bridge
-
+    networks:
+      - manyfold
+      - proxy
+      - tunnel
     ports:
       - 3214:3214
-
     volumes:
       - /mnt/lilin/resources/3d-models:/libraries
-
     security_opt:
       - no-new-privileges:true
-
     cap_drop:
       - ALL
-
     cap_add:
       - CHOWN
       - DAC_OVERRIDE
       - SETUID
       - SETGID
-
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.manyfold.rule=Host(`manyfold.iscariot.nervhq.io`)"
@@ -51,37 +42,36 @@ services:
 
   manyfold-db:
     container_name: manyfold-db
-
     image: mariadb:latest
-
     pull_policy: build
-
     restart: unless-stopped
-
     environment:
       - MYSQL_ROOT_PASSWORD=${MANYFOLD_DATABASE_PASSWORD} # Use a unique, secure password
       - MYSQL_DATABASE=manyfold
       - MYSQL_USER=manyfold
       - MYSQL_PASSWORD=${MANYFOLD_DATABASE_PASSWORD}
-
-    network_mode: bridge
-
+    networks:
+      - manyfold
     ports:
       - 41896:3306
-
     volumes:
       - /appdata/manyfold/db/mysql:/var/lib/mysql
 
   manyfold-cache:
     container_name: manyfold-cache
-
     image: redis:7
-
     pull_policy: build
-
     restart: unless-stopped
-
-    network_mode: bridge
-
+    networks:
+      - manyfold
     ports:
       - 58422:6379
+
+networks:
+  manyfold:
+    name: manyfold
+    driver: bridge
+  proxy:
+    external: true
+  tunnel:
+    external: true
