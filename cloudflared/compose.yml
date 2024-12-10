@@ -1,14 +1,21 @@
+# Needed environment variables:
+#  - TUNNEL_TOKEN: The token for the Cloudflare tunnel.
+
 services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
-    network_mode: bridge
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     command:
       - "tunnel"
       - "--no-autoupdate"
       - "run"
-    environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - tunnel
     restart: unless-stopped
     pull_policy: build
-      
+
+networks:
+  tunnel:
+    driver: bridge
