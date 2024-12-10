@@ -1,20 +1,31 @@
+# Needed environment variables:
+# - OVERSEER_HOST: The hostname of the service.
+
 services:
   overseerr:
     image: sctx/overseerr:latest
     container_name: overseerr
-    volumes:
-      - /appdata/overseer:/app/config
-    network_mode: bridge
     ports:
       - 5055:5055
     environment:
       - LOG_LEVEL=debug
       - TZ=America/Chicago
       - PORT=5055 #optional
-    restart: unless-stopped
-    pull_policy: build
+    volumes:
+      - /appdata/overseer:/app/config
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.overseer.rule=Host(`overseer.iscariot.nervhq.io`)"
+      - "traefik.http.routers.overseer.rule=Host(`${OVERSEER_HOST}`)"
       - "traefik.http.routers.overseer.entrypoints=websecure"
       - "traefik.http.routers.overseer.tls.certresolver=cloudflare"
+    networks:
+      - tunnel
+      - proxy
+    restart: unless-stopped
+    pull_policy: build
+
+networks:
+  tunnel:
+    external: true
+  proxy:
+    external: true
