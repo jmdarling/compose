@@ -7,6 +7,13 @@ export default [
     rules: {
       // Empty mapping values are needed in Docker Compose files.
       "yml/no-empty-mapping-value": "off",
+      "yml/no-multiple-empty-lines": [
+        "error",
+        {
+          max: 0,
+          maxEOF: 1,
+        },
+      ],
       "yml/sort-keys": [
         "error",
         {

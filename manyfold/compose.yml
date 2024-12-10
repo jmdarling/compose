@@ -1,7 +1,6 @@
 # Needed environment variables:
 # - MANYFOLD_DATABASE_PASSWORD: A password for the manyfold database.
 # - MANYFOLD_SECRET_KEY_BASE: Base to use for secret key generation.
-
 services:
   manyfold:
     container_name: manyfold
@@ -38,7 +37,6 @@ services:
       - traefik.http.routers.manyfold.entrypoints=websecure
       - traefik.http.routers.manyfold.tls.certresolver=cloudflare
       - traefik.http.services.manyfold.loadbalancer.server.port=3214
-
   manyfold-db:
     container_name: manyfold-db
     image: mariadb:latest
@@ -53,7 +51,6 @@ services:
       - manyfold
     volumes:
       - /appdata/manyfold/db/mysql:/var/lib/mysql
-
   manyfold-cache:
     container_name: manyfold-cache
     image: redis:7
@@ -61,7 +58,6 @@ services:
     restart: unless-stopped
     networks:
       - manyfold
-
 networks:
   manyfold:
     name: manyfold

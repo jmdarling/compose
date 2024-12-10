@@ -1,5 +1,4 @@
 version: "3.8"
-
 services:
   caddy:
     image: jmdarling0/caddy-cloudflare:latest

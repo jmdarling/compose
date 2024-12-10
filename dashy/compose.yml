@@ -1,6 +1,5 @@
 # Needed environment variables:
 # DASHY_HOST - The URL at which this service should be made available.
-
 services:
   dashy:
     container_name: dashy
@@ -14,7 +13,6 @@ services:
     networks:
       - proxy
       - tunnel
-
     volumes:
       - /appdata/dashy/config.yml:/app/user-data/conf.yml
     labels:

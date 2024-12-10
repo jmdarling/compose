@@ -1,6 +1,5 @@
 # Needed environment variables:
 # IMMICH_DB_PASSWORD = password for database
-
 services:
   immich:
     container_name: immich
@@ -18,7 +17,6 @@ services:
       - DB_PASSWORD: ${IMMICH_DB_PASSWORD}
       - DB_DATABASE_NAME: immich
       - REDIS_HOSTNAME: iscariot.nervhq.io
-      
     ports:
       - "2283:2283"
     volumes:
@@ -30,7 +28,6 @@ services:
       - traefik.http.routers.immich.entrypoints=websecure
       - traefik.http.routers.immich.tls.certresolver=cloudflare
       - traefik.http.services.immich.loadbalancer.server.port=2283
-
   immich-machine-learning:
     container_name: immich-machine-learning
     image: ghcr.io/immich-app/immich-machine-learning:release
@@ -39,14 +36,12 @@ services:
     network_mode: bridge
     volumes:
       - immich-model-cache:/cache
-
   immich-cache:
     container_name: immich-cache
     image: docker.io/redis:6.2-alpine@sha256:eaba718fecd1196d88533de7ba49bf903ad33664a92debb24660a922ecd9cac8
     pull_policy: build
     restart: unless-stopped
     network_mode: bridge
-
   immich-database:
     container_name: immich-database
     image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
@@ -67,7 +62,6 @@ services:
       - shared_buffers=512MB
       - -c
       - wal_compression=on
-      
     environment:
       POSTGRES_DB: immich
       POSTGRES_INITDB_ARGS: --data-checksums
@@ -77,6 +71,5 @@ services:
       - "5432:5432"
     volumes:
       - /appdata/immich/database/postgres:/var/lib/postgresql/data
-
 volumes:
   immich-model-cache:

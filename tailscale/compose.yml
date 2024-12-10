@@ -1,6 +1,5 @@
 # Needed environment variables:
 # TS_AUTHKEY - Tailscale Auth Key.
-
 services:
   tailscale:
     container_name: tailscaled

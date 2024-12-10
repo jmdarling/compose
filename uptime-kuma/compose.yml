@@ -15,7 +15,6 @@ services:
       - "traefik.http.routers.uptimekuma.rule=Host(`${UPTIME_KUMA_HOST}`)"
       - traefik.http.routers.uptimekuma.entrypoints=websecure
       - traefik.http.routers.uptimekuma.tls.certresolver=cloudflare
-
 networks:
   proxy:
     external: true

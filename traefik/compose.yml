@@ -1,13 +1,11 @@
 # Needed environment variables:
 #  - CF_API_EMAIL: Your Cloudflare account email.
 #  - CF_DNS_API_TOKEN: Your Cloudflare API token.
-
 services:
   traefik:
     container_name: traefik
     image: traefik:v3.1
     restart: unless-stopped
-
     command:
       - --accesslog=true
       - --api.dashboard=true

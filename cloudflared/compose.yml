@@ -1,12 +1,10 @@
 # Needed environment variables:
 #  - TUNNEL_TOKEN: The token for the Cloudflare tunnel.
-
 services:
   cloudflared:
     container_name: cloudflared
     image: cloudflare/cloudflared:latest
     pull_policy: build
-
     restart: unless-stopped
     command:
       - tunnel

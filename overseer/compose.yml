@@ -1,12 +1,10 @@
 # Needed environment variables:
 # - OVERSEER_HOST: The hostname of the service.
-
 services:
   overseerr:
     container_name: overseerr
     image: sctx/overseerr:latest
     pull_policy: build
-
     restart: unless-stopped
     environment:
       - LOG_LEVEL=debug

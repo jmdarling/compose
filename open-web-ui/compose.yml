@@ -1,6 +1,5 @@
 # Needed environment variables:
 # OPEN_WEB_UI_HOST - The URL at which this service should be made available.
-
 services:
   open-web-ui:
     container_name: open-web-ui
@@ -17,7 +16,6 @@ services:
       - "traefik.http.routers.openwebui.rule=Host(`${OPEN_WEB_UI_HOST}`)"
       - traefik.http.routers.openwebui.entrypoints=websecure
       - traefik.http.routers.openwebui.tls.certresolver=cloudflare
-
 networks:
   proxy:
     external: true

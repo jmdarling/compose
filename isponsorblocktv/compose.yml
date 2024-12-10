@@ -1,14 +1,9 @@
 services:
   iSponsorBlockTV:
     container_name: iSponsorBlockTV
-
     image: ghcr.io/dmunozv04/isponsorblocktv
-
     pull_policy: build
-    
     restart: unless-stopped
-
     network_mode: host
-    
     volumes:
       - /appdata/isponsorblocktv:/app/data

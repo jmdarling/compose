@@ -2,7 +2,6 @@
 # - ROMM_DATABASE_PASSWORD: A password for the romm database.
 # - ROMM_AUTH_SECRET_KEY: A secret key for romm auth.
 # - ROMM_MOBYGAMES_API_KEY: API key to access MobyGames data.
-
 services:
   romm:
     container_name: romm
@@ -39,7 +38,6 @@ services:
       - traefik.http.routers.romm.entrypoints=websecure
       - traefik.http.routers.romm.tls.certresolver=cloudflare
       - traefik.http.services.romm.loadbalancer.server.port=8080
-
   romm-db:
     container_name: romm-db
     image: mariadb:latest
@@ -52,7 +50,6 @@ services:
       - MYSQL_PASSWORD=${ROMM_DATABASE_PASSWORD}
     networks:
       - romm
-
     ports:
       - 21866:3306
     volumes:
