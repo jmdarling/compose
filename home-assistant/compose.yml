@@ -4,7 +4,7 @@
 services:
   home-assistant:
     container_name: home-assistant
-    
+
     image: "ghcr.io/home-assistant/home-assistant:stable"
 
     privileged: true
@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
     network_mode: host
-    
+
     volumes:
       - /appdata/home-assistant/config:/config
       - /etc/localtime:/etc/localtime:ro
@@ -27,3 +27,4 @@ services:
       - "traefik.http.routers.homeassistant.tls.certresolver=cloudflare"
       - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
       - "traefik.http.services.homeassistant.loadbalancer.server.scheme=http"
+      - "traefik.http.services.homeassistant.loadbalancer.server.url=http://mari.nervhq.io:8123"
