@@ -1,13 +1,11 @@
 # Needed environment variables:
-# CF_API_EMAIL - Email used for cloudflare registration.
-# CF_DNS_API_TOKEN - Token for cloudflare dns challenge.
+#  - CF_API_EMAIL: Your Cloudflare account email.
+#  - CF_DNS_API_TOKEN: Your Cloudflare API token.
 
 services:
   traefik:
-    # The official v3 Traefik docker image
     image: traefik:v3.1
     container_name: traefik
-    # Enables the web UI and tells Traefik to listen to docker
     command:
       - "--accesslog=true"
       - "--api.dashboard=true"
@@ -20,26 +18,28 @@ services:
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--certificatesresolvers.cloudflare.acme.dnschallenge=true"
       - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
-      - "--certificatesresolvers.cloudflare.acme.email=hello@jmdarling.com"
+      - "--certificatesresolvers.cloudflare.acme.email=${CF_API_EMAIL}"
       - "--certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json"
       - "--log.level=DEBUG"
-    network_mode: bridge
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    ports:
-      # The HTTP port
-      - "80:80"
-      - "443:443"
-      # The Web UI (enabled by --api.insecure=true)
-      - "8080:8080"
     environment:
       - CF_API_EMAIL=${CF_API_EMAIL}
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
     volumes:
-      # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
       - traefik-appdata:/letsencrypt
+    networks:
+      - proxy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: unless-stopped
-    pull_policy: build
+
 volumes:
   traefik-appdata:
+
+networks:
+  proxy:
+    driver: bridge

@@ -1,16 +1,24 @@
+# Needed environment variables:
+#  - HOSTNAME: The hostname of the service.
+
 services:
   uptime-kuma:
     image: louislam/uptime-kuma:1
     container_name: uptime-kuma
-    volumes:
-      - /appdata/uptime-kuma:/app/data
-    network_mode: bridge
     ports:
       - 3001:3001
+    volumes:
+      - /appdata/uptime-kuma:/app/data
+    networks:
+      - proxynet
     restart: unless-stopped
     pull_policy: build
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.uptimekuma.rule=Host(`uptime-kuma.iscariot.nervhq.io`)"
+      - "traefik.http.routers.uptimekuma.rule=Host(`${HOSTNAME}`)"
       - "traefik.http.routers.uptimekuma.entrypoints=websecure"
       - "traefik.http.routers.uptimekuma.tls.certresolver=cloudflare"
+
+networks:
+  proxy:
+    external: true
