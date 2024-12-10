@@ -5,6 +5,8 @@ services:
   cloudflared:
     container_name: cloudflared
     image: cloudflare/cloudflared:latest
+    pull_policy: build
+
     restart: unless-stopped
     command:
       - tunnel
@@ -14,8 +16,6 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
       - tunnel
-    pull_policy: build
-
 networks:
   tunnel:
     name: tunnel

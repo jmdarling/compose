@@ -19,6 +19,7 @@ export default [
             "container_name",
             "image",
             "build",
+            "pull_policy",
             "deploy",
             "restart",
             "command",

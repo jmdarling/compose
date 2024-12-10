@@ -4,12 +4,12 @@ services:
   uptime-kuma:
     container_name: uptime-kuma
     image: louislam/uptime-kuma:1
+    pull_policy: build
     restart: unless-stopped
     networks:
       - proxy
     volumes:
       - /appdata/uptime-kuma:/app/data
-    pull_policy: build
     labels:
       - traefik.enable=true
       - "traefik.http.routers.uptimekuma.rule=Host(`${UPTIME_KUMA_HOST}`)"

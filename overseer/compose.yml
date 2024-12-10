@@ -5,6 +5,8 @@ services:
   overseerr:
     container_name: overseerr
     image: sctx/overseerr:latest
+    pull_policy: build
+
     restart: unless-stopped
     environment:
       - LOG_LEVEL=debug
@@ -18,8 +20,6 @@ services:
       - "traefik.http.routers.overseer.rule=Host(`${OVERSEER_HOST}`)"
       - traefik.http.routers.overseer.entrypoints=websecure
       - traefik.http.routers.overseer.tls.certresolver=cloudflare
-    pull_policy: build
-
 networks:
   proxy:
     external: true
