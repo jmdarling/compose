@@ -2,19 +2,19 @@
 #  - UPTIME_KUMA_HOST: The hostname of the service.
 services:
   uptime-kuma:
-    image: louislam/uptime-kuma:1
     container_name: uptime-kuma
-    volumes:
-      - /appdata/uptime-kuma:/app/data
+    image: louislam/uptime-kuma:1
+    restart: unless-stopped
     networks:
       - proxy
-    restart: unless-stopped
+    volumes:
+      - /appdata/uptime-kuma:/app/data
     pull_policy: build
     labels:
-      - "traefik.enable=true"
+      - traefik.enable=true
       - "traefik.http.routers.uptimekuma.rule=Host(`${UPTIME_KUMA_HOST}`)"
-      - "traefik.http.routers.uptimekuma.entrypoints=websecure"
-      - "traefik.http.routers.uptimekuma.tls.certresolver=cloudflare"
+      - traefik.http.routers.uptimekuma.entrypoints=websecure
+      - traefik.http.routers.uptimekuma.tls.certresolver=cloudflare
 
 networks:
   proxy:

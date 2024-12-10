@@ -3,17 +3,17 @@
 
 services:
   cloudflared:
-    image: cloudflare/cloudflared:latest
     container_name: cloudflared
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command:
+      - tunnel
+      - --no-autoupdate
+      - run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-    command:
-      - "tunnel"
-      - "--no-autoupdate"
-      - "run"
     networks:
       - tunnel
-    restart: unless-stopped
     pull_policy: build
 
 networks:

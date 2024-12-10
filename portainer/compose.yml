@@ -1,25 +1,24 @@
-root@iscariot:/portainer# cat docker-compose.yml 
 services:
   portainer:
-    image: portainer/portainer-ce:2.21.3
     container_name: portainer
-    command: -H unix:///var/run/docker.sock
+    image: portainer/portainer-ce:2.21.3
     restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-    network_mode: bridge
+    command: -H unix:///var/run/docker.sock
     ports:
       - "8000:8000"
       - "9000:9000"
       - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    network_mode: bridge
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.iscariot.nervhq.io`)"
-      - "traefik.http.routers.portainer.entrypoints=websecure"
-      - "traefik.http.routers.portainer.tls.certresolver=cloudflare"
-      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
-      - "traefik.http.services.portainer.loadbalancer.server.scheme=http"
+      - traefik.enable=true
+      - traefik.http.routers.portainer.rule=Host(`portainer.iscariot.nervhq.io`)
+      - traefik.http.routers.portainer.entrypoints=websecure
+      - traefik.http.routers.portainer.tls.certresolver=cloudflare
+      - traefik.http.services.portainer.loadbalancer.server.port=9000
+      - traefik.http.services.portainer.loadbalancer.server.scheme=http
 
 volumes:
   portainer_data:

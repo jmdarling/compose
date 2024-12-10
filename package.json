@@ -1,0 +1,15 @@
+{
+  "name": "@jmdarling/compose",
+  "version": "1.0.0",
+  "description": "docker-compose.yml files for running various services",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^9.16.0",
+    "eslint-plugin-yml": "^1.16.0"
+  }
+}

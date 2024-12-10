@@ -3,21 +3,21 @@
 
 services:
   overseerr:
-    image: sctx/overseerr:latest
     container_name: overseerr
+    image: sctx/overseerr:latest
+    restart: unless-stopped
     environment:
       - LOG_LEVEL=debug
       - TZ=America/Chicago
+    networks:
+      - proxy
     volumes:
       - /appdata/overseer:/app/config
     labels:
-      - "traefik.enable=true"
+      - traefik.enable=true
       - "traefik.http.routers.overseer.rule=Host(`${OVERSEER_HOST}`)"
-      - "traefik.http.routers.overseer.entrypoints=websecure"
-      - "traefik.http.routers.overseer.tls.certresolver=cloudflare"
-    networks:
-      - proxy
-    restart: unless-stopped
+      - traefik.http.routers.overseer.entrypoints=websecure
+      - traefik.http.routers.overseer.tls.certresolver=cloudflare
     pull_policy: build
 
 networks:

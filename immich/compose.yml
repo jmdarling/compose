@@ -11,25 +11,25 @@ services:
     pull_policy: build
     restart: unless-stopped
     network_mode: bridge
-    ports:
-      - '2283:2283'
     environment:
-      - DB_HOSTNAME: 'iscariot.nervhq.io'
-      - DB_PORT: '5432'
-      - DB_USERNAME: 'immich'
+      - DB_HOSTNAME: iscariot.nervhq.io
+      - DB_PORT: "5432"
+      - DB_USERNAME: immich
       - DB_PASSWORD: ${IMMICH_DB_PASSWORD}
-      - DB_DATABASE_NAME: 'immich'
-      - REDIS_HOSTNAME: 'iscariot.nervhq.io'
+      - DB_DATABASE_NAME: immich
+      - REDIS_HOSTNAME: iscariot.nervhq.io
       
+    ports:
+      - "2283:2283"
     volumes:
       - /mnt/lilin/media/images/photos:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.immich.rule=Host(`immich.iscariot.nervhq.io`)"
-      - "traefik.http.routers.immich.entrypoints=websecure"
-      - "traefik.http.routers.immich.tls.certresolver=cloudflare"
-      - "traefik.http.services.immich.loadbalancer.server.port=2283"
+      - traefik.enable=true
+      - traefik.http.routers.immich.rule=Host(`immich.iscariot.nervhq.io`)
+      - traefik.http.routers.immich.entrypoints=websecure
+      - traefik.http.routers.immich.tls.certresolver=cloudflare
+      - traefik.http.services.immich.loadbalancer.server.port=2283
 
   immich-machine-learning:
     container_name: immich-machine-learning
@@ -53,29 +53,28 @@ services:
     pull_policy: build
     restart: unless-stopped
     network_mode: bridge
-    ports:
-      -  '5432:5432'
     command:
-      [
-        'postgres',
-        '-c',
-        'shared_preload_libraries=vectors.so',
-        '-c',
-        'search_path="$$user", public, vectors',
-        '-c',
-        'logging_collector=on',
-        '-c',
-        'max_wal_size=2GB',
-        '-c',
-        'shared_buffers=512MB',
-        '-c',
-        'wal_compression=on',
-      ]
+      - postgres
+      - -c
+      - shared_preload_libraries=vectors.so
+      - -c
+      - 'search_path="$$user", public, vectors'
+      - -c
+      - logging_collector=on
+      - -c
+      - max_wal_size=2GB
+      - -c
+      - shared_buffers=512MB
+      - -c
+      - wal_compression=on
+      
     environment:
-      POSTGRES_DB: 'immich'
-      POSTGRES_INITDB_ARGS: '--data-checksums'
+      POSTGRES_DB: immich
+      POSTGRES_INITDB_ARGS: --data-checksums
       POSTGRES_PASSWORD: ${IMMICH_DB_PASSWORD}
-      POSTGRES_USER: 'immich'
+      POSTGRES_USER: immich
+    ports:
+      - "5432:5432"
     volumes:
       - /appdata/immich/database/postgres:/var/lib/postgresql/data
 

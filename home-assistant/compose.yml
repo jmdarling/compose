@@ -21,10 +21,10 @@ services:
       - /run/dbus:/run/dbus:ro
 
     labels:
-      - "traefik.enable=true"
+      - traefik.enable=true
       - "traefik.http.routers.homeassistant.rule=Host(`${HOME_ASSISTANT_HOST}`)"
-      - "traefik.http.routers.homeassistant.entrypoints=websecure"
-      - "traefik.http.routers.homeassistant.tls.certresolver=cloudflare"
-      - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
-      - "traefik.http.services.homeassistant.loadbalancer.server.scheme=http"
+      - traefik.http.routers.homeassistant.entrypoints=websecure
+      - traefik.http.routers.homeassistant.tls.certresolver=cloudflare
+      - traefik.http.services.homeassistant.loadbalancer.server.port=8123
+      - traefik.http.services.homeassistant.loadbalancer.server.scheme=http
       - "traefik.http.services.homeassistant.loadbalancer.server.url=http://mari.nervhq.io:8123"

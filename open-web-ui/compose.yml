@@ -13,16 +13,16 @@ services:
     volumes:
       - open-web-ui:/app/backend/data
     labels:
-      - "traefik.enable=true"
+      - traefik.enable=true
       - "traefik.http.routers.openwebui.rule=Host(`${OPEN_WEB_UI_HOST}`)"
-      - "traefik.http.routers.openwebui.entrypoints=websecure"
-      - "traefik.http.routers.openwebui.tls.certresolver=cloudflare"
-
-volumes:
-  open-web-ui:
+      - traefik.http.routers.openwebui.entrypoints=websecure
+      - traefik.http.routers.openwebui.tls.certresolver=cloudflare
 
 networks:
   proxy:
     external: true
   tunnel:
     external: true
+volumes:
+  open-web-ui:
+

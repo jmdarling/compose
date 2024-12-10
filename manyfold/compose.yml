@@ -33,11 +33,11 @@ services:
       - SETUID
       - SETGID
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.manyfold.rule=Host(`manyfold.iscariot.nervhq.io`)"
-      - "traefik.http.routers.manyfold.entrypoints=websecure"
-      - "traefik.http.routers.manyfold.tls.certresolver=cloudflare"
-      - "traefik.http.services.manyfold.loadbalancer.server.port=3214"
+      - traefik.enable=true
+      - traefik.http.routers.manyfold.rule=Host(`manyfold.iscariot.nervhq.io`)
+      - traefik.http.routers.manyfold.entrypoints=websecure
+      - traefik.http.routers.manyfold.tls.certresolver=cloudflare
+      - traefik.http.services.manyfold.loadbalancer.server.port=3214
 
   manyfold-db:
     container_name: manyfold-db
