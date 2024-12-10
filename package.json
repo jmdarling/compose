@@ -4,12 +4,15 @@
   "description": "docker-compose.yml files for running various services",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^9.16.0",
-    "eslint-plugin-yml": "^1.16.0"
+    "eslint-plugin-yml": "^1.16.0",
+    "husky": "^9.1.7"
   }
 }
