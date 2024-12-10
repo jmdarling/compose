@@ -3,29 +3,27 @@
 
 services:
   dashy:
-    container_name: dashy
-
     image: lissy93/dashy
-    
+    container_name: dashy
     pull_policy: build
-
     restart: unless-stopped
-
     environment:
       - NODE_ENV=production
       - UID=1000
       - GID=1000
-
-    network_mode: bridge
-
-    ports:
-      - 11730:8080
-
     volumes:
       - /appdata/dashy/config.yml:/app/user-data/conf.yml
-
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.dashy.rule=Host(`${DASHY_HOST}`)"
       - "traefik.http.routers.dashy.entrypoints=websecure"
       - "traefik.http.routers.dashy.tls.certresolver=cloudflare"
+    networks:
+      - tunnel
+      - proxy
+
+networks:
+  tunnel:
+    external: true
+  proxy:
+    external: true
