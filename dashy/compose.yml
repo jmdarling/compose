@@ -19,11 +19,11 @@ services:
       - "traefik.http.routers.dashy.entrypoints=websecure"
       - "traefik.http.routers.dashy.tls.certresolver=cloudflare"
     networks:
-      - tunnel
       - proxy
+      - tunnel
 
 networks:
-  tunnel:
-    external: true
   proxy:
+    external: true
+  tunnel:
     external: true

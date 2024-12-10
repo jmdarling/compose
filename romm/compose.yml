@@ -11,8 +11,6 @@ services:
     restart: unless-stopped
     depends_on:
       - romm-db
-    ports:
-      - 27709:8080
     environment:
       - DB_HOST=iscariot.nervhq.io
       - DB_PORT=21866
@@ -33,8 +31,8 @@ services:
       - /mnt/lilin/media/games/console:/romm/library # Your game library
     networks:
       - romm
-      - tunnel
       - proxy
+      - tunnel
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.romm.rule=Host(`romm.iscariot.nervhq.io`)"
@@ -63,7 +61,7 @@ networks:
   romm:
     name: romm
     driver: bridge
-  tunnel:
-    external: true
   proxy:
+    external: true
+  tunnel:
     external: true

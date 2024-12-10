@@ -21,8 +21,6 @@ services:
       - manyfold
       - proxy
       - tunnel
-    ports:
-      - 3214:3214
     volumes:
       - /mnt/lilin/resources/3d-models:/libraries
     security_opt:
@@ -52,8 +50,6 @@ services:
       - MYSQL_PASSWORD=${MANYFOLD_DATABASE_PASSWORD}
     networks:
       - manyfold
-    ports:
-      - 41896:3306
     volumes:
       - /appdata/manyfold/db/mysql:/var/lib/mysql
 
@@ -64,8 +60,6 @@ services:
     restart: unless-stopped
     networks:
       - manyfold
-    ports:
-      - 58422:6379
 
 networks:
   manyfold:
