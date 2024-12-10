@@ -61,7 +61,7 @@ services:
 
 networks:
   romm:
-    name: manyfold
+    name: romm
     driver: bridge
   tunnel:
     external: true
