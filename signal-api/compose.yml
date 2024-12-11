@@ -10,7 +10,7 @@ services:
     volumes:
       - /appdata/signal-api:/home/.local/share/signal-cli
     labels:
-      - com.centurylinklabs.watchtower.enable
+      - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
       - traefik.http.routers.signal-api.rule=Host(`${SIGNAL_API_HOST}`)
       - traefik.http.routers.signal-api.entrypoints=websecure

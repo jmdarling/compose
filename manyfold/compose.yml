@@ -32,7 +32,7 @@ services:
       - SETUID
       - SETGID
     labels:
-      - com.centurylinklabs.watchtower.enable
+      - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
       - traefik.http.routers.manyfold.rule=Host(`manyfold.iscariot.nervhq.io`)
       - traefik.http.routers.manyfold.entrypoints=websecure
@@ -53,7 +53,7 @@ services:
     volumes:
       - /appdata/manyfold/db/mysql:/var/lib/mysql
     labels:
-      - com.centurylinklabs.watchtower.enable
+      - com.centurylinklabs.watchtower.enable=true
   manyfold-cache:
     container_name: manyfold-cache
     image: redis:7
@@ -62,7 +62,7 @@ services:
     networks:
       - manyfold
     labels:
-      - com.centurylinklabs.watchtower.enable
+      - com.centurylinklabs.watchtower.enable=true
 networks:
   manyfold:
     name: manyfold

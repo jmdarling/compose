@@ -14,7 +14,7 @@ services:
     volumes:
       - /appdata/overseer:/app/config
     labels:
-      - com.centurylinklabs.watchtower.enable
+      - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
       - "traefik.http.routers.overseer.rule=Host(`${OVERSEER_HOST}`)"
       - traefik.http.routers.overseer.entrypoints=websecure

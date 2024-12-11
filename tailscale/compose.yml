@@ -13,3 +13,5 @@ services:
     cap_add:
       - NET_ADMIN
       - NET_RAW
+    labels:
+      - com.centurylinklabs.watchtower.enable=true

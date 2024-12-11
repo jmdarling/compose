@@ -15,7 +15,7 @@ services:
     networks:
       - tunnel
     labels:
-      - com.centurylinklabs.watchtower.enable
+      - com.centurylinklabs.watchtower.enable=true
 networks:
   tunnel:
     name: tunnel

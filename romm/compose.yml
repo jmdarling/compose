@@ -33,7 +33,7 @@ services:
       - /mnt/lilin/media/games/assets:/romm/assets # Uploaded saves, states, etc.
       - /mnt/lilin/media/games/console:/romm/library # Your game library
     labels:
-      - com.centurylinklabs.watchtower.enable
+      - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
       - traefik.http.routers.romm.rule=Host(`romm.iscariot.nervhq.io`)
       - traefik.http.routers.romm.entrypoints=websecure
@@ -56,7 +56,7 @@ services:
     volumes:
       - /appdata/romm/database/mysql:/var/lib/mysql
     labels:
-      - com.centurylinklabs.watchtower.enable
+      - com.centurylinklabs.watchtower.enable=true
 networks:
   romm:
     name: romm

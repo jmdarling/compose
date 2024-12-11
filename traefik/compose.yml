@@ -43,4 +43,3 @@ networks:
     name: proxy
 volumes:
   traefik-appdata:
-

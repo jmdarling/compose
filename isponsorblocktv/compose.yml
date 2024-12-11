@@ -8,4 +8,4 @@ services:
     volumes:
       - /appdata/isponsorblocktv:/app/data
     labels:
-      - com.centurylinklabs.watchtower.enable
+      - com.centurylinklabs.watchtower.enable=true
