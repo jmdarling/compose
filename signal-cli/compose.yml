@@ -1,0 +1,19 @@
+services:
+  signal-api:
+    container_name: signal-api
+    image: bbernhard/signal-cli-rest-api
+    restart: unless-stopped
+    environment:
+      - MODE=native
+    networks:
+      - proxy
+    volumes:
+      - $HOME/.local/share/signal-api:/home/.local/share/signal-cli
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.signal-api.rule=Host(`${SIGNAL_API_HOST}`)
+      - traefik.http.routers.signal-api.entrypoints=websecure
+      - traefik.http.routers.signal-api.tls.certresolver=cloudflare
+networks:
+  proxy:
+    external: true
