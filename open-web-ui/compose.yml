@@ -12,6 +12,7 @@ services:
     volumes:
       - open-web-ui:/app/backend/data
     labels:
+      - com.centurylinklabs.watchtower.enable
       - traefik.enable=true
       - "traefik.http.routers.openwebui.rule=Host(`${OPEN_WEB_UI_HOST}`)"
       - traefik.http.routers.openwebui.entrypoints=websecure

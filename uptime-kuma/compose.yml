@@ -11,6 +11,7 @@ services:
     volumes:
       - /appdata/uptime-kuma:/app/data
     labels:
+      - com.centurylinklabs.watchtower.enable
       - traefik.enable=true
       - "traefik.http.routers.uptimekuma.rule=Host(`${UPTIME_KUMA_HOST}`)"
       - traefik.http.routers.uptimekuma.entrypoints=websecure

@@ -16,6 +16,7 @@ services:
     volumes:
       - /appdata/dashy/config.yml:/app/user-data/conf.yml
     labels:
+      - com.centurylinklabs.watchtower.enable
       - traefik.enable=true
       - "traefik.http.routers.dashy.rule=Host(`${DASHY_HOST}`)"
       - traefik.http.routers.dashy.entrypoints=websecure

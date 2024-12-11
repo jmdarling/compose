@@ -7,3 +7,5 @@ services:
     network_mode: host
     volumes:
       - /appdata/isponsorblocktv:/app/data
+    labels:
+      - com.centurylinklabs.watchtower.enable

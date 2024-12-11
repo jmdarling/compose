@@ -34,6 +34,7 @@ export default [
             "networks",
             "ports",
             "volumes",
+            "labels",
           ],
         },
       ],
