@@ -6,6 +6,7 @@ services:
   renovate:
     container_name: renovate
     image: ghcr.io/mend/renovate-ce:9.0.0-full
+    platform: linux/amd64
     pull_policy: build
     restart: unless-stopped
     environment:
