@@ -17,3 +17,4 @@ This repository contains the Docker Compose configurations for various services.
 - **tailscale**: [Docker Compose configuration for tailscale](./tailscale/compose.yml).
 - **traefik**: [Docker Compose configuration for traefik](./traefik/compose.yml).
 - **uptime-kuma**: [Docker Compose configuration for uptime-kuma](./uptime-kuma/compose.yml).
+- **watchtower**: [Docker Compose configuration for watchtower](./watchtower/compose.yml).
