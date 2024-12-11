@@ -1,8 +1,6 @@
 {
   "extends": ["config:recommended"],
-  "npm": { "enabled": true },
   "packageRules": [
-    { "matchCategories": ["docker"], "enabled": true },
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
