@@ -4,7 +4,7 @@ services:
     image: bbernhard/signal-cli-rest-api
     restart: unless-stopped
     environment:
-      - MODE=native
+      - MODE=normal
     networks:
       - proxy
     volumes:
