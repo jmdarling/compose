@@ -29,6 +29,8 @@ services:
     container_name: linkwarden-database
     image: postgres:16-alpine
     restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=${LINKWARDEN_POSTGRES_PASSWORD}
     networks:
       - linkwarden
     volumes:
