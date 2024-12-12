@@ -25,7 +25,7 @@ export default [
           order: [
             "container_name",
             "image",
-            "build",
+            "depends_on",
             "pull_policy",
             "deploy",
             "restart",

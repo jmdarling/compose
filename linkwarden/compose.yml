@@ -1,0 +1,41 @@
+# Needed environment variables:
+# - LINKWARDEN_HOST: The URL at which this service should be made available.
+# - LINKWARDEN_NEXTAUTH_SECRET: A secret for nextauth.
+# - LINKWARDEN_POSTGRES_PASSWORD: A password for the linkwarden database.
+services:
+  linkwarden:
+    container_name: linkwarden
+    image: ghcr.io/linkwarden/linkwarden:latest
+    depends_on:
+      - linkwarden-database
+    pull_policy: build
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://postgres:${LINKWARDEN_POSTGRES_PASSWORD}@postgres:5432/postgres
+      - NEXTAUTH_URL=http://localhost:3000/api/v1/auth
+      - NEXTAUTH_SECRET=${LINKWARDEN_NEXTAUTH_SECRET}
+    networks:
+      - linkwarden
+      - proxy
+    volumes:
+      - /appdata/linkwarden/data:/data/data
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - "traefik.http.routers.linkwarden.rule=Host(`${LINKWARDEN_HOST}`)"
+      - traefik.http.routers.linkwarden.entrypoints=websecure
+      - traefik.http.routers.linkwarden.tls.certresolver=cloudflare
+  linkwarden-database:
+    container_name: linkwarden-database
+    image: postgres:16-alpine
+    restart: unless-stopped
+    networks:
+      - linkwarden
+    volumes:
+      - /appdata/linkwarden/db/postgresql/data:/var/lib/postgresql/data
+networks:
+  linkwarden:
+    name: linkwarden
+    driver: bridge
+  proxy:
+    external: true
