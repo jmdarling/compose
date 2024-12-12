@@ -11,7 +11,7 @@ services:
     pull_policy: build
     restart: unless-stopped
     environment:
-      - DATABASE_URL=postgresql://postgres:${LINKWARDEN_POSTGRES_PASSWORD}@linkwarden-postgres:5432/postgres
+      - DATABASE_URL=postgresql://postgres:${LINKWARDEN_POSTGRES_PASSWORD}@linkwarden-database:5432/postgres
       - NEXTAUTH_URL=http://localhost:3000/api/v1/auth
       - NEXTAUTH_SECRET=${LINKWARDEN_NEXTAUTH_SECRET}
     networks:
