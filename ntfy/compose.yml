@@ -18,9 +18,9 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
-      - "traefik.http.routers.openwebui.rule=Host(`${NTFY_HOST}`)"
-      - traefik.http.routers.openwebui.entrypoints=websecure
-      - traefik.http.routers.openwebui.tls.certresolver=cloudflare
+      - "traefik.http.routers.ntfy.rule=Host(`${NTFY_HOST}`)"
+      - traefik.http.routers.ntfy.entrypoints=websecure
+      - traefik.http.routers.ntfy.tls.certresolver=cloudflare
 networks:
   proxy:
     external: true
