@@ -1,0 +1,26 @@
+# Needed environment variables:
+# - NTFY_HOST: The hostname to use for the ntfy service.
+services:
+  ntfy:
+    container_name: ntfy
+    image: binwiederhier/ntfy
+    pull_policy: build
+    restart: unless-stopped
+    command:
+      - serve
+    environment:
+      - TZ=America/Chicago
+    networks:
+      - proxy
+    volumes:
+      - /appdata/ntfy/cache:/var/cache/ntfy
+      - /appdata/ntfy/etc:/etc/ntfy
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - "traefik.http.routers.openwebui.rule=Host(`${NTFY_HOST}`)"
+      - traefik.http.routers.openwebui.entrypoints=websecure
+      - traefik.http.routers.openwebui.tls.certresolver=cloudflare
+networks:
+  proxy:
+    external: true
