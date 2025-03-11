@@ -7,20 +7,19 @@ services:
     image: pawelmalak/flame
     pull_policy: build
     restart: unless-stopped
+    environment:
+      - PASSWORD=${FLAME_PASSWORD}
     networks:
       - proxy
     volumes:
       - /appdata/flame:/app/data
       - /var/run/docker.sock:/var/run/docker.sock # optional but required for Docker integration
-    environment:
-      - PASSWORD=${FLAME_PASSWORD}
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
       - "traefik.http.routers.flame.rule=Host(`${FLAME_HOST}`)"
       - traefik.http.routers.flame.entrypoints=websecure
       - traefik.http.routers.flame.tls.certresolver=cloudflare
-
 networks:
   proxy:
     external: true
