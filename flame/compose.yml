@@ -4,7 +4,7 @@
 services:
   flame:
     container_name: flame
-    image: pawelmalak/flame
+    image: pawelmalak/flame:multiarch
     pull_policy: build
     restart: unless-stopped
     environment:
