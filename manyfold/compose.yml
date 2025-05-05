@@ -56,7 +56,7 @@ services:
       - com.centurylinklabs.watchtower.enable=true
   manyfold-cache:
     container_name: manyfold-cache
-    image: redis:7
+    image: redis:8
     pull_policy: build
     restart: unless-stopped
     networks:
