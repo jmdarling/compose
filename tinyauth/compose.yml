@@ -17,8 +17,8 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
-      - traefik.http.routers.tinyauth.rule: Host(`${TINYAUTH_HOST}`)
-      - traefik.http.middlewares.tinyauth.forwardauth.address: http://tinyauth:3000/api/auth/traefik
+      - traefik.http.routers.tinyauth.rule=Host(`${TINYAUTH_HOST}`)
+      - traefik.http.middlewares.tinyauth.forwardauth.address=http://tinyauth:3000/api/auth/traefik
       - traefik.http.routers.tinyauth.entrypoints=websecure
       - traefik.http.routers.tinyauth.tls.certresolver=cloudflare
 networks:
