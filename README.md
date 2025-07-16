@@ -18,6 +18,7 @@ This repository contains the Docker Compose configurations for various services.
 - **romm**: [Docker Compose configuration for romm](./romm/compose.yml).
 - **signal-api**: [Docker Compose configuration for signal-api](./signal-api/compose.yml).
 - **tailscale**: [Docker Compose configuration for tailscale](./tailscale/compose.yml).
+- **tinyauth**: [Docker Compose configuration for tinyauth](./tinyauth/compose.yml).
 - **traefik**: [Docker Compose configuration for traefik](./traefik/compose.yml).
 - **uptime-kuma**: [Docker Compose configuration for uptime-kuma](./uptime-kuma/compose.yml).
 - **watchtower**: [Docker Compose configuration for watchtower](./watchtower/compose.yml).
