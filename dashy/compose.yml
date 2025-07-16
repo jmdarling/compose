@@ -21,6 +21,7 @@ services:
       - "traefik.http.routers.dashy.rule=Host(`${DASHY_HOST}`)"
       - traefik.http.routers.dashy.entrypoints=websecure
       - traefik.http.routers.dashy.tls.certresolver=cloudflare
+      - traefik.http.routers.dashy.middlewares=tinyauth
 networks:
   proxy:
     external: true
