@@ -1,0 +1,26 @@
+# Needed environment variables:
+# - TINYAUTH_HOST: The hostname to use for the tinyauth service.
+# - TINYAUTH_SECRET: A random 32 character string.
+# - TINYAUTH_USERS: A colon-separated list of users in the format username:password_hash.
+services:
+  tinyauth:
+    container_name: tinyauth
+    image: ghcr.io/steveiliop56/tinyauth:v3
+    pull_policy: build
+    restart: unless-stopped
+    environment:
+      - SECRET=${TINYAUTH_SECRET}
+      - APP_URL=https://${TINYAUTH_HOST}
+      - USERS=${TINYAUTH_USERS}
+    networks:
+      - proxy
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - traefik.http.routers.tinyauth.rule: Host(`${TINYAUTH_HOST}`)
+      - traefik.http.middlewares.tinyauth.forwardauth.address: http://tinyauth:3000/api/auth/traefik
+      - traefik.http.routers.tinyauth.entrypoints=websecure
+      - traefik.http.routers.tinyauth.tls.certresolver=cloudflare
+networks:
+  proxy:
+    external: true
