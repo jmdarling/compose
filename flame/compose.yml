@@ -21,7 +21,6 @@ services:
       - traefik.http.routers.flame.entrypoints=websecure
       - traefik.http.routers.flame.tls.certresolver=cloudflare
       - traefik.http.routers.flame.middlewares=tinyauth
-
 networks:
   proxy:
     external: true
