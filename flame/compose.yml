@@ -11,6 +11,7 @@ services:
       - PASSWORD=${FLAME_PASSWORD}
     networks:
       - proxy
+      - tunnel
     volumes:
       - /appdata/flame:/app/data
       - /var/run/docker.sock:/var/run/docker.sock # optional but required for Docker integration
