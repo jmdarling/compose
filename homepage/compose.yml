@@ -1,0 +1,28 @@
+# Needed environment variables:
+# HOMEPAGE_HOST - The URL at which this service should be made available.
+services:
+  homepage:
+    container_name: homepage
+    image: ghcr.io/gethomepage/homepage:latest
+    pull_policy: build
+    restart: unless-stopped
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_HOST}
+    networks:
+      - proxy
+      - tunnel
+    volumes:
+      - /appdata/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - "traefik.http.routers.homepage.rule=Host(`${HOMEPAGE_HOST}`)"
+      - traefik.http.routers.homepage.entrypoints=websecure
+      - traefik.http.routers.homepage.tls.certresolver=cloudflare
+      - traefik.http.routers.homepage.middlewares=tinyauth
+networks:
+  proxy:
+    external: true
+  tunnel:
+    external: true
