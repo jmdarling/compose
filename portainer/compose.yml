@@ -1,3 +1,5 @@
+# Needed environment variables:
+# PORTAINER_HOST - The URL at which this service should be made available.
 services:
   portainer:
     container_name: portainer
@@ -15,7 +17,7 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
-      - traefik.http.routers.portainer.rule=Host(`portainer.iscariot.nervhq.io`)
+      - "traefik.http.routers.portainer.rule=Host(`${PORTAINER_HOST}`)"
       - traefik.http.routers.portainer.entrypoints=websecure
       - traefik.http.routers.portainer.tls.certresolver=cloudflare
       - traefik.http.services.portainer.loadbalancer.server.port=9000
