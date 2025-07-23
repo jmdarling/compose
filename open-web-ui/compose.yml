@@ -8,7 +8,6 @@ services:
     restart: unless-stopped
     networks:
       - proxy
-      - tunnel
     volumes:
       - open-web-ui:/app/backend/data
     labels:
