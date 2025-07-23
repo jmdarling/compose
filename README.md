@@ -7,7 +7,9 @@ This repository contains the Docker Compose configurations for various services.
 - **cloudflared**: [Docker Compose configuration for cloudflared](./cloudflared/compose.yml).
 - **dashy**: [Docker Compose configuration for dashy](./dashy/compose.yml).
 - **flame**: [Docker Compose configuration for flame](./flame/compose.yml).
+- **glance**: [Docker Compose configuration for glance](./glance/compose.yml).
 - **home-assistant**: [Docker Compose configuration for home-assistant](./home-assistant/compose.yml).
+- **homepage**: [Docker Compose configuration for homepage](./homepage/compose.yml).
 - **isponsorblocktv**: [Docker Compose configuration for isponsorblocktv](./isponsorblocktv/compose.yml).
 - **linkwarden**: [Docker Compose configuration for linkwarden](./linkwarden/compose.yml).
 - **manyfold**: [Docker Compose configuration for manyfold](./manyfold/compose.yml).

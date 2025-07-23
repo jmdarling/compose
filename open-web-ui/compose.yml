@@ -20,8 +20,6 @@ services:
 networks:
   proxy:
     external: true
-  tunnel:
-    external: true
 volumes:
   open-web-ui:
 
