@@ -1,0 +1,27 @@
+# Needed environment variables:
+# HOMARR_HOST - The URL at which this service should be made available.
+# HOMARR_SECRET_ENCRYPTION_KEY - Secret key for encrypting sensitive data (generate with: openssl rand -hex 32)
+services:
+  homarr:
+    container_name: homarr
+    image: ghcr.io/homarr-labs/homarr:latest
+    pull_policy: build
+    restart: unless-stopped
+    environment:
+      - SECRET_ENCRYPTION_KEY=${HOMARR_SECRET_ENCRYPTION_KEY}
+    networks:
+      - proxy
+    volumes:
+      - /appdata/homarr:/appdata
+      - /var/run/docker.sock:/var/run/docker.sock # optional but required for Docker integration
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - "traefik.http.routers.homarr.rule=Host(`${HOMARR_HOST}`)"
+      - traefik.http.routers.homarr.entrypoints=websecure
+      - traefik.http.routers.homarr.tls.certresolver=cloudflare
+      - traefik.http.routers.homarr.middlewares=tinyauth
+      - traefik.http.services.homarr.loadbalancer.server.port=7575
+networks:
+  proxy:
+    external: true
