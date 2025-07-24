@@ -3,7 +3,7 @@
 services:
   portainer:
     container_name: portainer
-    image: portainer/portainer-ce:2.32.0
+    image: portainer/portainer-ce:lts
     restart: always
     command: -H unix:///var/run/docker.sock
     networks:
@@ -28,4 +28,3 @@ networks:
     external: true
 volumes:
   portainer_data:
-
