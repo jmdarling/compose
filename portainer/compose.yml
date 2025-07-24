@@ -13,7 +13,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
-    network_mode: bridge
+    networks:
+      - proxy
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
@@ -24,3 +25,7 @@ services:
       - traefik.http.services.portainer.loadbalancer.server.scheme=http
 volumes:
   portainer_data:
+
+networks:
+  proxy:
+    external: true
