@@ -1,0 +1,29 @@
+# Needed environment variables:
+# SEARXNG_HOST - The URL at which this service should be made available.
+services:
+  searxng:
+    container_name: searxng
+    image: searxng/searxng:latest
+    restart: unless-stopped
+    environment:
+      - BIND_ADDRESS=0.0.0.0:8080
+      - INSTANCE_NAME=SearXNG
+      - AUTOCOMPLETE=true
+    networks:
+      - proxy
+    volumes:
+      - searxng_config:/etc/searxng
+      - searxng_data:/var/cache/searxng
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - "traefik.http.routers.searxng.rule=Host(`${SEARXNG_HOST}`)"
+      - traefik.http.routers.searxng.entrypoints=websecure
+      - traefik.http.routers.searxng.tls.certresolver=cloudflare
+      - traefik.http.services.searxng.loadbalancer.server.port=8080
+networks:
+  proxy:
+    external: true
+volumes:
+  searxng_config:
+  searxng_data:
