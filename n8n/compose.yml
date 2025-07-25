@@ -5,7 +5,7 @@ services:
   n8n:
     container_name: n8n
     image: n8nio/n8n:latest
-    pull_policy: build
+    pull_policy: always
     restart: unless-stopped
     environment:
       - N8N_HOST=${N8N_HOST}
