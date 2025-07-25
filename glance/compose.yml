@@ -8,7 +8,6 @@ services:
     restart: unless-stopped
     networks:
       - proxy
-      - tunnel
     volumes:
       - /appdata/glance:/app/config
     labels:
@@ -17,9 +16,6 @@ services:
       - "traefik.http.routers.glance.rule=Host(`${GLANCE_HOST}`)"
       - traefik.http.routers.glance.entrypoints=websecure
       - traefik.http.routers.glance.tls.certresolver=cloudflare
-      - traefik.http.routers.glance.middlewares=tinyauth
 networks:
   proxy:
-    external: true
-  tunnel:
     external: true
