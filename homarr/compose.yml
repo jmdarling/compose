@@ -20,7 +20,6 @@ services:
       - "traefik.http.routers.homarr.rule=Host(`${HOMARR_HOST}`)"
       - traefik.http.routers.homarr.entrypoints=websecure
       - traefik.http.routers.homarr.tls.certresolver=cloudflare
-      - traefik.http.routers.homarr.middlewares=tinyauth
       - traefik.http.services.homarr.loadbalancer.server.port=7575
 networks:
   proxy:
