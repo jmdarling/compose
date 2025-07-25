@@ -14,6 +14,7 @@ This repository contains the Docker Compose configurations for various services.
 - **isponsorblocktv**: [Docker Compose configuration for isponsorblocktv](./isponsorblocktv/compose.yml).
 - **linkwarden**: [Docker Compose configuration for linkwarden](./linkwarden/compose.yml).
 - **manyfold**: [Docker Compose configuration for manyfold](./manyfold/compose.yml).
+- **n8n**: [Docker Compose configuration for n8n](./n8n/compose.yml).
 - **ntfy**: [Docker Compose configuration for ntfy](./ntfy/compose.yml).
 - **open-web-ui**: [Docker Compose configuration for open-web-ui](./open-web-ui/compose.yml).
 - **overseer**: [Docker Compose configuration for overseer](./overseer/compose.yml).
