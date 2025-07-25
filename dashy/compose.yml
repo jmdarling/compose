@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     environment:
       - NODE_ENV=production
+      - PID=0
+      - GID=0
     networks:
       - proxy
     volumes:
