@@ -8,12 +8,10 @@ services:
     restart: unless-stopped
     environment:
       - NODE_ENV=production
-      - PID=0
-      - GID=0
     networks:
       - proxy
     volumes:
-      - /appdata/dashy/config.yml:/app/user-data/conf.yml
+      - /appdata/dashy:/app/user-data
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
