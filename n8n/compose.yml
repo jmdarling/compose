@@ -4,20 +4,20 @@
 services:
   n8n:
     container_name: n8n
-    image: n8nio/n8n:latest
-    pull_policy: always
+    image: docker.n8n.io/n8nio/n8n
+    pull_policy: build
     restart: unless-stopped
     environment:
       - N8N_HOST=${N8N_HOST}
       - N8N_PORT=5678
       - N8N_PROTOCOL=https
       - NODE_ENV=production
-      - WEBHOOK_URL=https://${N8N_HOST}
-      - GENERIC_TIMEZONE=${N8N_TZ:-UTC}
+      - WEBHOOK_URL=https://${N8N_HOST}/
+      - GENERIC_TIMEZONE=${N8N_TZ}
     networks:
       - proxy
     volumes:
-      - /appdata/n8n:/home/node/.n8n
+      - n8n_data:/home/node/.n8n
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
@@ -28,3 +28,5 @@ services:
 networks:
   proxy:
     external: true
+volumes:
+  n8n_data:
