@@ -8,11 +8,8 @@ services:
     restart: unless-stopped
     environment:
       - NODE_ENV=production
-      - UID=1000
-      - GID=1000
     networks:
       - proxy
-      - tunnel
     volumes:
       - /appdata/dashy/config.yml:/app/user-data/conf.yml
     labels:
@@ -21,9 +18,6 @@ services:
       - "traefik.http.routers.dashy.rule=Host(`${DASHY_HOST}`)"
       - traefik.http.routers.dashy.entrypoints=websecure
       - traefik.http.routers.dashy.tls.certresolver=cloudflare
-      - traefik.http.routers.dashy.middlewares=tinyauth
 networks:
   proxy:
-    external: true
-  tunnel:
     external: true
