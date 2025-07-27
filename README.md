@@ -4,6 +4,7 @@ This repository contains the Docker Compose configurations for various services.
 
 ## Services
 
+- **atuin**: [Docker Compose configuration for atuin](./atuin/compose.yml).
 - **cloudflared**: [Docker Compose configuration for cloudflared](./cloudflared/compose.yml).
 - **dashy**: [Docker Compose configuration for dashy](./dashy/compose.yml).
 - **flame**: [Docker Compose configuration for flame](./flame/compose.yml).

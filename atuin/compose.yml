@@ -1,0 +1,29 @@
+# Needed environment variables:
+# ATUIN_HOST - The URL at which this service should be made available.
+# ATUIN_OPEN_REGISTRATION - Whether to allow new user registrations (true/false, optional, defaults to false)
+services:
+  atuin:
+    container_name: atuin
+    image: ghcr.io/atuinsh/atuin:v18.7.1
+    pull_policy: build
+    restart: unless-stopped
+    command: server start
+    environment:
+      - ATUIN_HOST=0.0.0.0
+      - ATUIN_PORT=8888
+      - ATUIN_DB_URI=sqlite:///config/atuin.db
+      - ATUIN_OPEN_REGISTRATION=${ATUIN_OPEN_REGISTRATION:-false}
+    networks:
+      - proxy
+    volumes:
+      - /appdata/atuin:/config
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - "traefik.http.routers.atuin.rule=Host(`${ATUIN_HOST}`)"
+      - traefik.http.routers.atuin.entrypoints=websecure
+      - traefik.http.routers.atuin.tls.certresolver=cloudflare
+      - traefik.http.services.atuin.loadbalancer.server.port=8888
+networks:
+  proxy:
+    external: true
