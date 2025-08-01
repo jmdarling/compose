@@ -1,6 +1,5 @@
 # Needed environment variables:
 # ATUIN_HOST - The URL at which this service should be made available.
-# ATUIN_OPEN_REGISTRATION - Whether to allow new user registrations (true/false, optional, defaults to false)
 services:
   atuin:
     container_name: atuin
@@ -12,7 +11,7 @@ services:
       - ATUIN_HOST=0.0.0.0
       - ATUIN_PORT=8888
       - ATUIN_DB_URI=sqlite:///config/atuin.db
-      - ATUIN_OPEN_REGISTRATION=${ATUIN_OPEN_REGISTRATION:-false}
+      - ATUIN_OPEN_REGISTRATION=true
     networks:
       - proxy
     volumes:
