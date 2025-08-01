@@ -15,7 +15,7 @@ services:
     networks:
       - proxy
     volumes:
-      - /appdata/atuin:/config
+      - ./appdata/atuin/config:/config
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
