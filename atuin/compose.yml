@@ -21,7 +21,7 @@ services:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
       - "traefik.http.routers.atuin.rule=Host(`${ATUIN_HOST}`)"
-      - traefik.http.routers.atuin.entrypoints=websecure
+      - traefik.http.routers.atuin.entrypoints=websecure,web
       - traefik.http.routers.atuin.tls.certresolver=cloudflare
       - traefik.http.services.atuin.loadbalancer.server.port=8888
 networks:
