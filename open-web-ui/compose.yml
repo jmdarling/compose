@@ -5,6 +5,7 @@ services:
     container_name: open-web-ui
     image: ghcr.io/open-webui/open-webui:main
     pull_policy: build
+    user: 2000:2000
     restart: unless-stopped
     networks:
       - proxy
