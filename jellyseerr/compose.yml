@@ -1,0 +1,25 @@
+# Needed environment variables:
+# JELLYSEERR_HOST - The URL at which this service should be made available.
+services:
+  jellyseerr:
+    container_name: jellyseerr
+    image: fallenbagel/jellyseerr:latest
+    pull_policy: build
+    user: 2000:2000
+    restart: unless-stopped
+    environment:
+      - TZ=America/Chicago
+      - LOG_LEVEL=info
+    networks:
+      - proxy
+    volumes:
+      - /opt/appdata/jellyseerr/config:/app/config
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - "traefik.http.routers.jellyseerr.rule=Host(`${JELLYSEERR_HOST}`)"
+      - traefik.http.routers.jellyseerr.entrypoints=websecure
+      - traefik.http.routers.jellyseerr.tls.certresolver=cloudflare
+networks:
+  proxy:
+    external: true
