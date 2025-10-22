@@ -3,7 +3,7 @@
 services:
   atuin:
     container_name: atuin
-    image: ghcr.io/atuinsh/atuin:v18.9.0
+    image: ghcr.io/atuinsh/atuin:v18.10.0
     pull_policy: build
     user: 2000:2000
     restart: unless-stopped
