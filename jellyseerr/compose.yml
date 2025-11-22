@@ -12,7 +12,7 @@ services:
     networks:
       - proxy
     volumes:
-      - jellyseerr-config:/app/config
+      - /appdata/jellyseer/app:/app/config
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=true
@@ -22,5 +22,3 @@ services:
 networks:
   proxy:
     external: true
-volumes:
-  jellyseerr-config:
