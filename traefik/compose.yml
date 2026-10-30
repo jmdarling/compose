@@ -9,7 +9,6 @@ services:
     command:
       - --accesslog=true
       - --api.dashboard=true
-      - --api.insecure=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
       - --providers.docker.network=proxy
@@ -31,7 +30,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - traefik-appdata:/letsencrypt

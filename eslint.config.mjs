@@ -4,6 +4,7 @@ export default [
   // js.configs.recommended,
   ...eslintPluginYml.configs["flat/standard"],
   {
+    files: ["**/compose.yml"],
     rules: {
       // Empty mapping values are needed in Docker Compose files.
       "yml/no-empty-mapping-value": "off",
