@@ -115,3 +115,9 @@ Uptime Kuma 2.5.8 passed SQLite initialization, admin creation, and login after
 restart. Local Node 26 lint, npm audit (zero findings), and all 25 Compose
 configuration checks passed. These checks do not validate real DNS, TLS,
 notification delivery, production credentials, or old database migrations.
+
+Linkwarden 2.16.3 (`latest` image at test time) applied all 99 Prisma migrations
+to an empty PostgreSQL 18 database, started its web app and worker, returned
+HTTP 200, and passed Prisma user create/read/delete. The upstream example still
+uses PostgreSQL 16; this is a tested compatibility result, not an upstream
+certification of PostgreSQL 18 or a full application regression test.
