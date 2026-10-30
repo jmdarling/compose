@@ -70,3 +70,54 @@ and all 25 Compose config checks passed after the fixes. Configuration validatio
 does not verify image availability, migration behavior, real environment values,
 or runtime connectivity. GitHub execution of the new workflow remains untested
 until publication is authorized. No push, PR mutation, merge or deployment occurred.
+
+## Fresh-install upgrade follow-up — 2026-10-30
+
+The owner confirmed these configurations are unused and authorized the held
+major upgrades. The hold decisions above describe the earlier review; the
+fresh-install configurations now target PostgreSQL 18, Uptime Kuma 2 and
+Tinyauth 5. No existing data or live host was migrated.
+
+PostgreSQL 18 mounts `/appdata/linkwarden/db/postgresql` at
+`/var/lib/postgresql`; its default data directory is `18/docker` underneath.
+Do not reuse an existing 17 data directory without a separate dump/restore or
+pg_upgrade procedure. See the [official image documentation](https://github.com/docker-library/docs/blob/master/postgres/README.md).
+
+Tinyauth uses `TINYAUTH_UI_TITLE`, `TINYAUTH_APPURL`, and
+`TINYAUTH_AUTH_USERS`, and persists its SQLite sessions in `/appdata/tinyauth`
+mounted at `/data`. `TINYAUTH_HOST` and `TINYAUTH_USERS` remain Compose inputs;
+the users input is a comma-separated list of `username:password_hash` entries.
+The removed `SECRET` and `DISABLE_CONTINUE` settings have no replacement.
+The Traefik forward-auth URL remains `/api/auth/traefik`. Existing installations
+must follow the [v3-to-v4](https://tinyauth.app/docs/breaking-updates/3-to-4/)
+and [v4-to-v5](https://tinyauth.app/docs/breaking-updates/4-to-5/) guides;
+these fresh installations need no intermediate deployment.
+
+Uptime Kuma retains `/app/data` persistence. Fresh v2 startup presents a database
+setup screen; choose SQLite to use the mounted directory, then create the admin
+account. Existing v1 users still need an offline directory backup and an
+uninterrupted migration; see the [official migration guide](https://github.com/louislam/uptime-kuma/wiki/Migration-From-v1-To-v2).
+
+The validation workflow only installs development dependencies, runs lint and
+npm audit, and renders Compose configuration. It does not start or deploy
+services. Checkout v7.0.1 and setup-node v7.1.0 pins were matched to upstream
+release tags; setup-node's ESM and dummy NODE_AUTH_TOKEN changes do not affect
+this public npm install. Node 26.13.0 was available in the official distribution
+index and its downloaded archive was SHA-256 verified. The four tooling PRs
+(#135–#138, including ESLint 10.14.0) passed CI and post-merge CI.
+
+Fresh-install tests used disposable cloud containers and temporary data, with
+web ports bound only to loopback. PostgreSQL 18.6 initialized in
+`/var/lib/postgresql/18/docker` and preserved SQL data across restart.
+Tinyauth 5.0.7 passed health, anonymous denial, invalid-login denial, valid login,
+Traefik forward-auth, and authenticated session persistence after restart.
+Uptime Kuma 2.5.8 passed SQLite initialization, admin creation, and login after
+restart. Local Node 26 lint, npm audit (zero findings), and all 25 Compose
+configuration checks passed. These checks do not validate real DNS, TLS,
+notification delivery, production credentials, or old database migrations.
+
+Linkwarden 2.16.3 (`latest` image at test time) applied all 99 Prisma migrations
+to an empty PostgreSQL 18 database, started its web app and worker, returned
+HTTP 200, and passed Prisma user create/read/delete. The upstream example still
+uses PostgreSQL 16; this is a tested compatibility result, not an upstream
+certification of PostgreSQL 18 or a full application regression test.

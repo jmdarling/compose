@@ -27,14 +27,14 @@ services:
       - traefik.http.routers.linkwarden.tls.certresolver=cloudflare
   linkwarden-database:
     container_name: linkwarden-database
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     restart: unless-stopped
     environment:
       - POSTGRES_PASSWORD=${LINKWARDEN_POSTGRES_PASSWORD}
     networks:
       - linkwarden
     volumes:
-      - /appdata/linkwarden/db/postgresql/data:/var/lib/postgresql/data
+      - /appdata/linkwarden/db/postgresql:/var/lib/postgresql
 networks:
   linkwarden:
     name: linkwarden
